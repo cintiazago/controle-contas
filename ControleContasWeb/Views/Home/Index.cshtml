@@ -6,6 +6,7 @@
         <tr>
             <td>#</td>
             <td>#</td>
+            <td>#</td>
             <td>ID</td>
             <td>Tipo de Conta</td>
             <td>ID Conta Matriz</td>
@@ -25,6 +26,7 @@
         <tr>
             <td style="width:80px;"><button class="btn btn-default" onclick="registrar(@item.Id.ToString())">Editar</button></td>
             <td style="width:80px;"><button class="btn btn-danger" onclick="excluir(@item.Id.ToString())">Excluir</button></td>
+            <td style="width:80px;"><button class="btn btn-secondary" onclick="movimentacoes(@item.Id.ToString())">Movimentações</button></td>
             <td>@item.Id.ToString()</td>
             <td>@item.Tipo_conta.ToString()</td>
             <td>@item.Id_conta_matriz.ToString()</td>
@@ -54,5 +56,8 @@
 
     function excluir(id) {
         window.location.href = window.location.origin + "/Home/Excluir/" + id;
+    }
+    function movimentacoes(id) {
+        window.location.href = window.location.origin + "/Home/Movimentacoes/" + id;
     }
 </script>

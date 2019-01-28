@@ -27,6 +27,14 @@ namespace ControleContasWeb.Models
 
         }
 
+        public List<MovimentacaoModel> ListarMovimentacao(int id_conta)
+        {
+            List<MovimentacaoModel> retorno = new List<MovimentacaoModel>();
+            string json = WebAPI.RequestGET("conta/historico-movimentacao", id_conta.ToString());
+
+            return JsonConvert.DeserializeObject<List<MovimentacaoModel>>(json);
+        }
+
         public ContaModel Carregar(int? id)
         {
             ContaModel retorno = new ContaModel();

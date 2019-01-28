@@ -1,5 +1,5 @@
 ﻿@model ContaModel
-<h2>Criar Conta</h2>
+<h2>Criar/Alterar Conta</h2>
 
 @{
 
@@ -51,8 +51,18 @@
         <div class="col-lg-3">
             <label>Código Pessoa</label>
             <input asp-for="Id_pessoa" class="form-control" value="@id_pessoa" />
-        </div>        
+        </div>
     </div>
     <br /><br />
+         
     <button type="submit" class="btn btn-block btn-success" onclick="registrar()">Enviar</button>
+    
 </form>
+<br />
+<button class="btn btn-block btn-default" onclick="voltar()">Voltar</button>
+
+<script>    
+    function voltar() {
+        window.location.href = window.location.origin + "/Home";
+    }
+</script>

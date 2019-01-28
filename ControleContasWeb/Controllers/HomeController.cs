@@ -17,6 +17,13 @@ namespace ControleContasWeb.Controllers
             return View();
         }
 
+        public IActionResult Movimentacoes(int id)
+        {
+            ContaModel objConta = new ContaModel();
+            ViewBag.ListarMovimentacao = objConta.ListarMovimentacao(id);
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Registrar(int? id)
         {

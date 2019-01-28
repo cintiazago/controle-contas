@@ -1,0 +1,47 @@
+﻿@model MovimentacaoModel
+
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>ID</td>
+            <td>Tipo</td>            
+            <td>Conta Debitada</td>
+            <td>Conta Creditada</td>
+            <td>Data da Movimentação</td>
+            <td>Data de Estorno</td>
+            <td>Valor</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <h2>Movimentações</h2>
+        <hr />
+        @foreach (var item in (List<MovimentacaoModel>)ViewBag.ListarMovimentacao)
+        {
+        <tr>
+            <td style="width:80px;"><button class="btn btn-success" onclick="estornar(@item.Id.ToString())">Estornar</button></td>
+            <td>@item.Id.ToString()</td>
+            <td>@item.Tipo.ToString()</td>
+            <td>@item.Id_conta_debito.ToString()</td>
+            <td>@item.Id_conta_credito.ToString()</td>
+            <td>@item.Data_movimentacao.ToString()</td>
+            <td>@item.Data_estorno.ToString()</td>
+            <td>@item.Valor.ToString()</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+<button class="btn btn-block btn-default" onclick="voltar()">Voltar</button>
+
+<script>
+    function estornar(id) {
+        window.location.href = window.location.origin + "/Home/Estornar/" + id;
+    }
+    function voltar() {
+        window.location.href = window.location.origin + "/Home";
+    }
+</script>
