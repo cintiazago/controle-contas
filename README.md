@@ -6,7 +6,7 @@
 
 ## Descrição
 
-Solução desenvolvida em ASP.NET Core 2.2 e bancod e dados MySQL para controle de contas.
+Solução desenvolvida em ASP.NET Core 2.2 e banco de dados MySQL para controle de contas.
 
 ## Documentação da API 
 
