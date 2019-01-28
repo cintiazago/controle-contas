@@ -7,3 +7,7 @@
 ## Descrição
 
 Solução desenvolvida em ASP.NET Core 2.2 para controle de contas.
+
+## Documentação da API 
+
+Para visualização da especificação da API, acesse {url:porta}/swagger/index.html
