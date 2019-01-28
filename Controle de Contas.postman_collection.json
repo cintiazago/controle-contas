@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "66c9e9a8-97db-43bd-92b9-f44ffc902996",
+		"name": "Controle de Contas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/contas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/conta/contas",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"contas"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/conta<id>",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/conta/conta/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"conta",
+						"2"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/conta/historico-movimentacao/<id>",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/conta/historico-movimentacao/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"historico-movimentacao",
+						"2"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/criar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nome\": \"Conta Filial 2\",\r\n\t\"data_criacao\": \"26/01/2019\",\r\n\t\"tipo_conta\": \"F\",\r\n    \"id_conta_matriz\": 2,\r\n    \"id_pessoa\": 4\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/conta/criar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"criar"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/deletar/<id>",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/conta/deletar/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"deletar",
+						"4"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/transferencia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"valor\": 8000,\n\t\"id_conta_credito\": 3,\n\t\"id_conta_debito\": 2,\n\t\"data_movimentacao\": \"26/01/2019\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/movimentacao/transferir",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"movimentacao",
+						"transferir"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/aporte",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tipo\": \"A\",\n\t\"valor\": 15000,\n\t\"data_movimentacao\": \"26/01/2019\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/movimentacao/aporte/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"movimentacao",
+						"aporte",
+						"2"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/estornar<id_movimentacao>",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "AppControleConta2019@#%",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/movimentacao/estornar/14",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"movimentacao",
+						"estornar",
+						"14"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		},
+		{
+			"name": "/atualizar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nome\": \"Conta Matriz 1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/conta/atualizar/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"conta",
+						"atualizar",
+						"2"
+					]
+				},
+				"description": "Listagem de contas"
+			},
+			"response": []
+		}
+	]
+}

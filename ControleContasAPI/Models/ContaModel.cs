@@ -143,23 +143,23 @@ namespace ControleContasAPI.Models
             for (int i = 0; i < dados.Rows.Count; i++)
             {
                 string str_data_estorno;
-                try
+                if (dados.Rows[i]["data_estorno"].Equals(String.Empty))
                 {
-                    str_data_estorno = DateTime.Parse(dados.Rows[0]["data_estorno"].ToString()).ToString("dd/MM/yyyy");
+                    str_data_estorno = DateTime.Parse(dados.Rows[i]["data_estorno"].ToString()).ToString("dd/MM/yyyy");
                 }
-                catch
+                else
                 {
                     str_data_estorno = "";
                 }
                 item = new MovimentacaoModel()
                 {
-                    Id = int.Parse(dados.Rows[0]["id"].ToString()),
-                    Tipo = dados.Rows[0]["tipo"].ToString(),
-                    Valor = Double.Parse(dados.Rows[0]["valor"].ToString()),
-                    Id_conta_debito = int.Parse(dados.Rows[0]["id_conta_debito"].ToString()),
-                    Id_conta_credito = int.Parse(dados.Rows[0]["id_conta_credito"].ToString()),
+                    Id = int.Parse(dados.Rows[i]["id"].ToString()),
+                    Tipo = dados.Rows[i]["tipo"].ToString(),
+                    Valor = Double.Parse(dados.Rows[i]["valor"].ToString()),
+                    Id_conta_debito = int.Parse(dados.Rows[i]["id_conta_debito"].ToString()),
+                    Id_conta_credito = int.Parse(dados.Rows[i]["id_conta_credito"].ToString()),
                     Data_estorno = str_data_estorno,
-                    Data_movimentacao = DateTime.Parse(dados.Rows[0]["Data_movimentacao"].ToString()).ToString("dd/MM/yyyy")
+                    Data_movimentacao = DateTime.Parse(dados.Rows[i]["Data_movimentacao"].ToString()).ToString("dd/MM/yyyy")
                 };
                 lista.Add(item);
             }
