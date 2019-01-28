@@ -1,0 +1,58 @@
+﻿@model ContaModel
+
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>#</td>
+            <td>ID</td>
+            <td>Tipo de Conta</td>
+            <td>ID Conta Matriz</td>
+            <td>ID Pessoa</td>
+            <td>NOME</td>
+            <td>Data de Criação</td>
+            <td>Situação</td>
+            <td>Saldo</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <h2>Contas Cadastradas</h2>
+        <hr />
+        @foreach (var item in (List<ContaModel>)ViewBag.ListarContas)
+        {
+        <tr>
+            <td style="width:80px;"><button class="btn btn-default" onclick="registrar(@item.Id.ToString())">Editar</button></td>
+            <td style="width:80px;"><button class="btn btn-danger" onclick="excluir(@item.Id.ToString())">Excluir</button></td>
+            <td>@item.Id.ToString()</td>
+            <td>@item.Tipo_conta.ToString()</td>
+            <td>@item.Id_conta_matriz.ToString()</td>
+            <td>@item.Id_pessoa.ToString()</td>
+            <td>@item.Nome.ToString()</td>
+            <td>@item.Data_criacao.ToString()</td>
+            <td>@item.Situacao.ToString()</td>
+            <td>@item.Saldo.ToString()</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+<button class="btn btn-block btn-primary" onclick="registrar()">Criar Conta</button>
+
+<script>
+    function registrar(id) {
+        if (id == null){
+            id = "";
+        }
+        else {
+            id = "/" + id;
+        }
+        window.location.href = window.location.origin + "/Home/Registrar" + id;
+    }
+
+    function excluir(id) {
+        window.location.href = window.location.origin + "/Home/Excluir/" + id;
+    }
+</script>

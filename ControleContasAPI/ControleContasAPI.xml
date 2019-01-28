@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ControleContasAPI</name>
+    </assembly>
+    <members>
+        <member name="M:ControleContasAPI.Controllers.ContaController.contas">
+            <summary>
+            Recupera uma lista de todas as contas cadastradas.
+            </summary>        
+            <returns>Objeto contendo lista das contas</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.ContaController.conta(System.Int32)">
+            <summary>
+            Busca uma conta especifica.
+            </summary>
+            <param name="id">ID da conta pesquisada</param>
+            <returns>Objeto contendo dados da conta cadastrada.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.ContaController.Criar(ControleContasAPI.Models.ContaModel)">
+            <summary>
+            Cria uma conta matriz ou filial.
+            </summary>
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.ContaController.Atualizar(System.Int32,ControleContasAPI.Models.ContaModel)">
+            <summary>
+            Altera uma conta cadastrada.
+            </summary>
+            <param name="id">ID da conta a ser alterada.</param>
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.ContaController.Deletar(System.Int32)">
+            <summary>
+            Exclui uma conta cadastrada.
+            </summary>
+            <param name="id">ID da conta a ser deletada</param>
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.ContaController.HistoricoMovimetacao(System.Int32)">
+            <summary>
+            Busca todo o histórico da movimentação feita na conta pesquisada.
+            </summary>
+            <param name="id_conta">ID da conta relacionada ao histórico.</param>
+            <returns>Objeto contendo lista de toda a movimentação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.MovimentacaoController.Transferir(ControleContasAPI.Models.MovimentacaoModel)">
+            <summary>
+            Efetua a transferencia de uma conta para outra.
+            Tranferencias são permitidas apenas de uma Conta Matriz para Filiais, ou
+            contas filiais para outras filiais, desde que estejam na mesma árvore de contas.       
+            </summary>       
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.MovimentacaoController.Aporte(System.Int32,ControleContasAPI.Models.MovimentacaoModel)">
+            <summary>
+            Realita o aporte para uma determinada Conta Matriz.
+            </summary>
+            <param name="id_conta">ID da conta a receber o aporte.</param>
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+        <member name="M:ControleContasAPI.Controllers.MovimentacaoController.Estornar(System.Int32)">
+            <summary>
+            Estorna uma movimentação efetuada.        
+            </summary>
+            <param name="id">ID da movimentação</param>
+            <returns>JSON com resultado da operação.</returns>
+        </member>
+    </members>
+</doc>

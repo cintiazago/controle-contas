@@ -1,0 +1,58 @@
+﻿@model ContaModel
+<h2>Criar Conta</h2>
+
+@{
+
+    var id = string.Empty;
+    var nome = string.Empty;
+    var data_criacao = string.Empty;    
+    var tipo_conta = string.Empty;
+    var id_pessoa = string.Empty;    
+    var id_conta_matriz = string.Empty;
+
+    try
+    {
+        id = ViewBag.Registro.Id.ToString();
+        nome = ViewBag.Registro.Nome.ToString();
+        data_criacao = ViewBag.Registro.Data_criacao.ToString();
+        tipo_conta = ViewBag.Registro.Tipo_conta.ToString();
+        id_conta_matriz = ViewBag.Registro.Id_conta_matriz.ToString();        
+        id_pessoa = ViewBag.Registro.Id_pessoa.ToString();        
+    }
+    catch
+    {
+
+    }
+}
+
+<form asp-controller="Home" asp-action="Registrar">
+    <input asp-for="Id" class="form-control" value="@id" type="hidden" />
+    <div class="row">
+        <div class="col-lg-3">
+            <label>Nome</label>
+            <input asp-for="Nome" class="form-control" value="@nome" />
+        </div>
+
+        <div class="col-lg-3">
+            <label>Data Criação</label>
+            <input asp-for="Data_criacao" class="form-control" value="@data_criacao" />
+        </div>
+
+        <div class="col-lg-3">
+            <label>Tipo da Conta (Matriz ou Filial)</label>
+            <input asp-for="Tipo_conta" class="form-control" value="@tipo_conta" />
+        </div>
+
+        <div class="col-lg-3">
+            <label>Código Conta Matriz</label>
+            <input asp-for="Id_conta_matriz" class="form-control" value="@id_conta_matriz" />
+        </div>
+
+        <div class="col-lg-3">
+            <label>Código Pessoa</label>
+            <input asp-for="Id_pessoa" class="form-control" value="@id_pessoa" />
+        </div>        
+    </div>
+    <br /><br />
+    <button type="submit" class="btn btn-block btn-success" onclick="registrar()">Enviar</button>
+</form>
