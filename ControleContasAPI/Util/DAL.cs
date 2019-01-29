@@ -15,7 +15,7 @@ namespace ControleContasAPI.Util
         private static string Password = "";
         private MySqlConnection Connection;
 
-        private string ConnectionString = $"Server={Server};Database={Database};Uid={User};Pwd={Password};Sslmode=equired;charset=utf8";
+        private string ConnectionString = $"Server={Server};Database={Database};Uid={User};Pwd={Password};Sslmode=Required;charset=utf8";
 
         public DAL()
         {            
