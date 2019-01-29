@@ -44,19 +44,15 @@
 <button class="btn btn-block btn-primary" onclick="registrar()">Criar Conta</button>
 
 <script>
-    function registrar(id) {
-        if (id == null){
-            id = "";
-        }
-        else {
-            id = "/" + id;
-        }
+    function registrar(id) {        
+        id = ((id == null) ? "" : "/" + id);
         window.location.href = window.location.origin + "/Home/Registrar" + id;
     }
 
     function excluir(id) {
         window.location.href = window.location.origin + "/Home/Excluir/" + id;
     }
+
     function movimentacoes(id) {
         window.location.href = window.location.origin + "/Home/Movimentacoes/" + id;
     }

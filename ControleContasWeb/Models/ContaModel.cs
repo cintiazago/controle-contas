@@ -62,5 +62,11 @@ namespace ControleContasWeb.Models
             ContaModel retorno = new ContaModel();
             string json = WebAPI.RequestDELETE("conta/deletar", id.ToString());
         }
+
+        public void Estornar(int id)
+        {
+            MovimentacaoModel retorno = new MovimentacaoModel();
+            retorno.Estornar(id);            
+        }
     }
 }

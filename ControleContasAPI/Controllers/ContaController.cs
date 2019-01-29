@@ -26,10 +26,29 @@ namespace ControleContasAPI.Controllers
         /// <returns>Objeto contendo lista das contas</returns>
         [HttpGet]
         [Route("contas")]
-        public List<ContaModel> contas()
+        [ProducesResponseType(200)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(500)]
+        public ActionResult<List<ContaModel>> contas()
         {
-            AutenticacaoServico.Autenticar();
-            return new ContaModel().GetContas();
+            ReturnAllServices retorno = new ReturnAllServices();
+            try
+            {
+                if (AutenticacaoServico.Autenticar())
+                {
+                    return new OkObjectResult(new ContaModel().GetContas());
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                retorno.Result = false;
+                retorno.ErrorMessage = "Erro ao criar: " + ex.Message;
+                return StatusCode(500, retorno);
+            }
         }
 
         /// <summary>
@@ -39,10 +58,18 @@ namespace ControleContasAPI.Controllers
         /// <returns>Objeto contendo dados da conta cadastrada.</returns>
         [HttpGet]
         [Route("conta/{id}")]
-        public ContaModel conta(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(403)]
+        public ActionResult<ContaModel> conta(int id)
         {
-            AutenticacaoServico.Autenticar();
-            return new ContaModel().GetConta(id);
+            if (AutenticacaoServico.Autenticar())
+            {
+                return new OkObjectResult( new ContaModel().GetConta(id));
+            }
+            else
+            {
+                return new ForbidResult();
+            }
         }
 
         /// <summary>
@@ -51,22 +78,32 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpPost]
         [Route("criar")]
-        public ReturnAllServices Criar([FromBody] ContaModel dados)
+        [ProducesResponseType(201)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(500)]
+        public ActionResult Criar([FromBody] ContaModel dados)
         {
             ReturnAllServices retorno = new ReturnAllServices();
             try
             {
-                AutenticacaoServico.Autenticar();
-                dados.Criar();
-                retorno.Result = true;
-                retorno.ErrorMessage = string.Empty;
+                if (AutenticacaoServico.Autenticar())
+                {
+                    dados.Criar();
+                    retorno.Result = true;
+                    retorno.ErrorMessage = string.Empty;
+                    return new OkObjectResult(retorno);
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
             }
             catch (Exception ex)
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao criar: " + ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
         }
 
         /// <summary>
@@ -76,24 +113,34 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpPut]
         [Route("atualizar/{id}")]
-        public ReturnAllServices Atualizar(int id, [FromBody] ContaModel dados)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(500)]
+        public ActionResult Atualizar(int id, [FromBody] ContaModel dados)
         {
             ReturnAllServices retorno = new ReturnAllServices();
 
             try
             {
-                AutenticacaoServico.Autenticar();
-                dados.Id = id;
-                dados.Atualizar();
-                retorno.Result = true;
-                retorno.ErrorMessage = string.Empty;
+                if (AutenticacaoServico.Autenticar())
+                {
+                    dados.Id = id;
+                    dados.Atualizar();
+                    retorno.Result = true;
+                    retorno.ErrorMessage = string.Empty;
+                    return new OkObjectResult(retorno);
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
             }
             catch (Exception ex)
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao tentar atualizar um cliente: " + ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
         }
 
         /// <summary>
@@ -103,23 +150,33 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpDelete]
         [Route("deletar/{id}")]
-        public ReturnAllServices Deletar(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(500)]
+        public ActionResult Deletar(int id)
         {
             ReturnAllServices retorno = new ReturnAllServices();
 
             try
             {
-                AutenticacaoServico.Autenticar();
-                retorno.Result = true;
-                retorno.ErrorMessage = "Cliente excluido com sucesso.";
-                new ContaModel().Deletar(id);
+                if (AutenticacaoServico.Autenticar())
+                {
+                    retorno.Result = true;
+                    retorno.ErrorMessage = "Cliente excluido com sucesso.";
+                    new ContaModel().Deletar(id);
+                    return new OkResult();
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
             }
             catch (Exception ex)
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
         }
 
         /// <summary>
@@ -128,11 +185,27 @@ namespace ControleContasAPI.Controllers
         /// <param name="id_conta">ID da conta relacionada ao histórico.</param>
         /// <returns>Objeto contendo lista de toda a movimentação.</returns>
         [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(500)]
         [Route("historico-movimentacao/{id_conta}")]
-        public List<MovimentacaoModel> HistoricoMovimetacao(int id_conta){
+        public ActionResult<List<MovimentacaoModel>> HistoricoMovimetacao(int id_conta){
 
-            return new ContaModel().GetHistoricoMovimentacao(id_conta);
+            try
+            {
+                if (AutenticacaoServico.Autenticar())
+                {
+                    return new OkObjectResult(new ContaModel().GetHistoricoMovimentacao(id_conta));
+                }
+                else
+                {
+                    return new ForbidResult();
+                }
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
-
     }
 }

@@ -33,6 +33,16 @@ namespace ControleContasWeb.Util
             return RequestGET_DELETE(metodo, parametro, "DELETE");
         }
 
+        public static string RequestPOST_PARAM(string metodo, string parametro)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(URI + metodo + "/" + parametro);
+            request.Headers.Add("Token", TOKEN);
+            request.Method = "POST";
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd();
+            return responseString;
+        }
+
         public static string RequestPOST(string metodo, string jsonData)
         {
             var request = (HttpWebRequest)WebRequest.Create(URI + metodo);

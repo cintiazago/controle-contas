@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleContasWeb.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,12 @@ namespace ControleContasWeb.Models
         public int Id_conta_credito { get; set; }
         public string Data_estorno { get; set; }
         public string Data_movimentacao { get; set; }
+
+        public void Estornar(int id)
+        {
+            ContaModel retorno = new ContaModel();
+            string json = WebAPI.RequestPOST_PARAM("movimentacao/estornar", id.ToString());
+        }
     }
+
 }

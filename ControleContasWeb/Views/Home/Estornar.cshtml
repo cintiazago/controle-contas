@@ -1,0 +1,19 @@
+﻿<h1>Estornar Movimentação</h1>
+
+<h3>Deseja estornar a movimentação selecionada?</h3>
+
+<button class="btn btn-danger" onclick="Estornar(1);">Sim</button>
+<button class="btn btn-primary" onclick="Estornar(0);">Não</button>
+
+<script>
+    function Estornar(id)
+    {
+        if (id == 0)
+        {
+            window.location.href = window.location.origin + "/Home/Index";
+        }
+        else {
+            window.location.href = window.location.origin + "/Home/EstornarMovimentacao/" + '@ViewData["MovimentacaoID"]';
+        }
+    }
+</script>

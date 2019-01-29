@@ -28,7 +28,7 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpPost]
         [Route("transferir")]
-        public ReturnAllServices Transferir([FromBody] MovimentacaoModel dados)
+        public ActionResult Transferir([FromBody] MovimentacaoModel dados)
         {
             ReturnAllServices retorno = new ReturnAllServices();
 
@@ -42,16 +42,19 @@ namespace ControleContasAPI.Controllers
                 {
                     retorno.Result = false;
                     retorno.ErrorMessage = "Não é permitido efetuar transferencia de Conta Filial para Conta Matriz.";
+                    return StatusCode(403, retorno);
                 }
                 else if ((contaC.Tipo_conta == "M"))
                 {
                     retorno.Result = false;
                     retorno.ErrorMessage = "Não é permitido efetuar transferencia para Conta Matriz. Realize um Aporte.";
+                    return StatusCode(403, retorno);
                 }
                 else if (contaD.Saldo < dados.Valor)
                 {
                     retorno.Result = false;
                     retorno.ErrorMessage = $"Saldo insuficiente na Conta." + contaD.Id;
+                    return StatusCode(403, retorno);
                 }
                 else
                 {
@@ -64,8 +67,9 @@ namespace ControleContasAPI.Controllers
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao tentar efeturar transferencia: " + ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
+            return StatusCode(200, retorno);
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpPost]
         [Route("aporte/{id_conta}")]
-        public ReturnAllServices Aporte(int id_conta, [FromBody] MovimentacaoModel dados)
+        public ActionResult Aporte(int id_conta, [FromBody] MovimentacaoModel dados)
         {
             ReturnAllServices retorno = new ReturnAllServices();
 
@@ -87,6 +91,7 @@ namespace ControleContasAPI.Controllers
                 if (conta_mov.Tipo_conta != "M") {
                     retorno.Result = false;
                     retorno.ErrorMessage = "Aporte não pode ser realizado para conta Filial.";
+                    return StatusCode(403, retorno);
                 }
                 else
                 {
@@ -99,8 +104,9 @@ namespace ControleContasAPI.Controllers
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao tentar realizar aporte: " + ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
+            return StatusCode(200, retorno);
         }
 
         /// <summary>
@@ -110,7 +116,7 @@ namespace ControleContasAPI.Controllers
         /// <returns>JSON com resultado da operação.</returns>
         [HttpPost]
         [Route("estornar/{id}")]
-        public ReturnAllServices Estornar(int id)
+        public ActionResult Estornar(int id)
         {
             ReturnAllServices retorno = new ReturnAllServices();
             
@@ -119,14 +125,15 @@ namespace ControleContasAPI.Controllers
                 AutenticacaoServico.Autenticar();
                 MovimentacaoModel.RealizarEstorno(id);
                 retorno.Result = true;
-                retorno.ErrorMessage = "Estorno realizado com sucesso.";               
+                retorno.ErrorMessage = "Estorno realizado com sucesso.";                
             }
             catch (Exception ex)
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao tentar realizar estorno: " + ex.Message;
+                return StatusCode(500, retorno);
             }
-            return retorno;
+            return StatusCode(200, retorno);
         }
     }
 }

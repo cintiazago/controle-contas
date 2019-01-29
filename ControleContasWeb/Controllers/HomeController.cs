@@ -46,10 +46,22 @@ namespace ControleContasWeb.Controllers
             ViewData["ContaID"] = id.ToString();
             return View();
         }
-        
+
         public IActionResult ExcluirConta(int id)
         {
             new ContaModel().Excluir(id);
+            return View();
+        }
+
+        public IActionResult Estornar(int id)
+        {
+            ViewData["MovimentacaoID"] = id.ToString();
+            return View();
+        }
+
+        public IActionResult EstornarMovimentacao(int id)
+        {
+            new ContaModel().Estornar(id);
             return View();
         }
 
